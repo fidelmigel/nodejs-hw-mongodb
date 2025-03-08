@@ -2,15 +2,15 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
-
 import { getEnvVar } from './utils/getEnvVar.js';
-import { getAllContacts, getContactById } from './services/contacts.js';
+import contactsRouter from './routers/contacts.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
 export async function setupServer() {
   try {
     const app = express();
+
     app.use(express.json());
     app.use(cors());
     app.use(
@@ -21,44 +21,15 @@ export async function setupServer() {
       }),
     );
 
-    app.get('/contacts', async (req, res) => {
-      const contacts = await getAllContacts();
+    app.use('/contacts', contactsRouter);
 
-      res.status(200).json({
-        status: 200,
-        message: 'Successfully found contacts!',
-        data: contacts,
-      });
-    });
-
-    app.get('/contacts/:contactId', async (req, res, next) => {
-      const { contactId } = req.params;
-      const contact = await getContactById(contactId);
-
-      if (!contact) {
-        res.status(404).json({
-          message: 'Contact not found',
-        });
-        return;
-      }
-
-      res.status(200).json({
-        status: 200,
-        message: `Successfully found contact with id ${contactId}!`,
-        data: contact,
-      });
-    });
-
-    app.use((req, res, next) => {
+    app.use((req, res) => {
       res.status(404).json({ message: 'Not found' });
     });
 
     app.use((err, req, res, next) => {
-      console.error(err); // Log the error for debugging
-      res.status(500).json({
-        status: 500,
-        message: 'Something went wrong',
-      });
+      console.error(err);
+      res.status(500).json({ status: 500, message: 'Something went wrong' });
     });
 
     app.listen(PORT, () => {
