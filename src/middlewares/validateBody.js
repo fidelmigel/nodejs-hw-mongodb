@@ -1,4 +1,5 @@
 import createHttpError from 'http-errors';
+
 export const validateBody = (schema) => {
   return async (req, res, next) => {
     try {
@@ -7,9 +8,15 @@ export const validateBody = (schema) => {
       });
       next();
     } catch (err) {
+      const errorDetails = err.details.map((detail) => ({
+        message: detail.message,
+        path: detail.path,
+      }));
+
       const error = createHttpError(400, 'Bad request', {
-        errors: err.details,
+        errors: errorDetails,
       });
+
       next(error);
     }
   };
