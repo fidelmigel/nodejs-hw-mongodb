@@ -4,10 +4,10 @@ import { setupServer } from './server.js';
 const bootstrap = async () => {
   try {
     await initMongoConnection();
+    console.log('Mongo connection successfully established!');
     setupServer();
   } catch (error) {
-    console.error('Error during server startup:', error);
-    process.exit(1);
+    console.error('Error connecting to MongoDB:', error);
   }
 };
 
