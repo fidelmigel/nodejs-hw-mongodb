@@ -7,7 +7,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import router from './routers/index.js';
 
-const PORT = Number(getEnvVar('PORT', '3000'));
+const PORT = Number(getEnvVar('PORT', '3001'));
 
 export const setupServer = async () => {
   const app = express();
