@@ -3,7 +3,14 @@ import bcrypt from 'bcrypt';
 import { User } from '../models/user.js';
 import { Session } from '../models/session.js';
 import crypto from 'node:crypto';
+<<<<<<< HEAD
 import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../constants/index.js';
+=======
+import {
+  FIFTEEN_MINUTE_INTERVAL,
+  THIRTY_DAY_INTERVAL,
+} from '../constants/index.js';
+>>>>>>> main
 
 export const registerUser = async (payload) => {
   const user = await User.findOne({ email: payload.email });
@@ -33,8 +40,13 @@ export const loginUser = async (email, password) => {
     userId: user._id,
     accessToken: crypto.randomBytes(30).toString('base64'),
     refreshToken: crypto.randomBytes(30).toString('base64'),
+<<<<<<< HEAD
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
+=======
+    accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTE_INTERVAL),
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAY_INTERVAL),
+>>>>>>> main
   });
 };
 
@@ -62,7 +74,12 @@ export const refreshSession = async (sessionId, refreshToken) => {
     userId: session.userId,
     accessToken: crypto.randomBytes(30).toString('base64'),
     refreshToken: crypto.randomBytes(30).toString('base64'),
+<<<<<<< HEAD
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
+=======
+    accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTE_INTERVAL),
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAY_INTERVAL),
+>>>>>>> main
   });
 };
