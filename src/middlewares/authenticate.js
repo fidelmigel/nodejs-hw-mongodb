@@ -6,21 +6,13 @@ export const authenticate = async (req, res, next) => {
   const { authorization } = req.headers;
 
   if (typeof authorization !== 'string') {
-<<<<<<< HEAD
     return next(createHttpError(401, 'Pleaze provide access token'));
-=======
-    return next(createHttpError(401, 'Please provide access token'));
->>>>>>> main
   }
 
   const [bearer, accessToken] = authorization.split(' ', 2);
 
   if (bearer !== 'Bearer' || typeof accessToken !== 'string') {
-<<<<<<< HEAD
     return next(createHttpError(401, 'Pleaze provide access token'));
-=======
-    return next(createHttpError(401, 'Please provide access token'));
->>>>>>> main
   }
 
   const session = await Session.findOne({ accessToken });
