@@ -8,7 +8,7 @@
 .DS_Store
 .idea
 
-temp/*
-!temp/.gitkeet
-uploads/*
-!uploads/.gitkeet
+//temp/*
+//!temp/.gitkeet
+//uploads/*
+//!uploads/.gitkeet
