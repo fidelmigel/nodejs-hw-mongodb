@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://contacts-app-gpkz.onrender.com/"
+      "url": "https://contacts-app-gpkz.onrender.com"
     },
     {
       "url": "http://localhost:3001"
